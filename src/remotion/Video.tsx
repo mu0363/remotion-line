@@ -1,0 +1,22 @@
+import type { FC } from "react";
+import { Provider } from "react-redux";
+import { Composition } from "remotion";
+import { Templater01 } from "./Templater01";
+import { store } from "src/libs/store";
+import { Template1DefaultProps } from "src/libs/const";
+
+export const MyVideo: FC = () => {
+  return (
+    <Provider store={store}>
+      <Composition
+        id="template01"
+        component={Templater01}
+        durationInFrames={120}
+        width={1080}
+        height={1080}
+        fps={30}
+        defaultProps={Template1DefaultProps}
+      />
+    </Provider>
+  );
+};
