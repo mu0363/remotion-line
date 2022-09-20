@@ -18,7 +18,7 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
         }}
         durationInFrames={120}
         compositionWidth={1080}
-        compositionHeight={1920}
+        compositionHeight={1080}
         fps={30}
         style={{ width: "100%" }}
         controls={false}

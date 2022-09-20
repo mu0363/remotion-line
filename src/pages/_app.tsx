@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import type { Liff } from "@line/liff";
 import { useState, useEffect } from "react";
 import { NextComponentType, NextPageContext } from "next";
+import { Provider } from "react-redux";
+import { store } from "src/libs/store";
 
 type AppProps = {
   pageProps: any;
@@ -36,7 +38,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   // to page component as property
   pageProps.liff = liffObject;
   pageProps.liffError = liffError;
-  return <Component {...pageProps} />;
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
 export default MyApp;

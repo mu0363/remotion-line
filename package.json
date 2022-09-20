@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@line/liff": "2.21.1",
+    "@reduxjs/toolkit": "^1.8.5",
     "@remotion/cli": "^3.2.21",
     "@remotion/player": "^3.2.21",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.2",
     "remotion": "^3.2.21"
   },
   "devDependencies": {
