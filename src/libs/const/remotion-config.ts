@@ -12,10 +12,9 @@ export const storageUrl =
   "https://worhhbmrflaaoczgxikp.supabase.co/storage/v1/object/public";
 
 export const Template1DefaultProps: Template1Type = {
-  music:
-    "https://worhhbmrflaaoczgxikp.supabase.co/storage/v1/object/public/music/music1.mp3",
-  watermark: WATERMARK_BLACK,
   composition: "template01",
   image_url: `${storageUrl}/images/image-01.jpg`,
   text: "素敵な友人に\n恵まれた大学時代",
+  template_number: 1,
+  user_id: USER_ID,
 };

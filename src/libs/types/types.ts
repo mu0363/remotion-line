@@ -1,7 +1,7 @@
 export type Template1Type = {
-  music: string;
-  watermark: string;
   composition: string;
-  image_url?: string;
+  image_url: string;
   text: string;
+  template_number: number;
+  user_id: string;
 };

@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { Composition } from "remotion";
 import { Templater01 } from "./Templater01";
 import { store } from "src/libs/store";
+import { Template1DefaultProps } from "src/libs/const";
 
 export const MyVideo: FC = () => {
   return (
@@ -14,11 +15,7 @@ export const MyVideo: FC = () => {
         width={1080}
         height={1080}
         fps={30}
-        defaultProps={{
-          text: "World",
-          image_url:
-            "https://worhhbmrflaaoczgxikp.supabase.co/storage/v1/object/public/images/image-02.jpg",
-        }}
+        defaultProps={Template1DefaultProps}
       />
     </Provider>
   );
