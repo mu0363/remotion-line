@@ -1,7 +1,6 @@
 import type { Liff } from "@line/liff";
 import type { NextPage } from "next";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 
 const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
   liff,
@@ -15,8 +14,8 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1>liff-app powered by mu0363</h1>
+      <main>
+        <h1 className="text-red-500">liff-app powered by mu0363</h1>
         {liff && <p>LIFF init succeeded.</p>}
         {liffError && (
           <>
