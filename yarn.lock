@@ -1793,7 +1793,7 @@
     style-loader "2.0.0"
     webpack "5.72.0"
 
-"@remotion/cli@3.2.21", "@remotion/cli@^3.2.21":
+"@remotion/cli@3.2.21":
   version "3.2.21"
   resolved "https://registry.yarnpkg.com/@remotion/cli/-/cli-3.2.21.tgz#24668b8b69b32ae0c082cddb7b000376d6a7189a"
   integrity sha512-vM6NXMF7B8VhANsoBPJfaaMsIDx3D0q8X5LgW9DB7+OEtH+sP0xwR5VnjynluCd8NSJ9TsRMrWwVpub3c8chbw==
@@ -1837,7 +1837,7 @@
   dependencies:
     remotion "3.2.21"
 
-"@remotion/player@3.2.21", "@remotion/player@^3.2.21":
+"@remotion/player@3.2.21":
   version "3.2.21"
   resolved "https://registry.yarnpkg.com/@remotion/player/-/player-3.2.21.tgz#03fc916da69ddb9f79532096acb01ebc86130e1a"
   integrity sha512-vZ4D9VdYdejEcBIU04b5Y3qbb9XVtuIvzkDgWF1Hsu5nJvzjpIvCQxSs+ipBEP7K/9HCEDYFm7LEv2/vp0c2HA==
@@ -3744,6 +3744,11 @@ jest-worker@^27.4.5:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
+jotai@^1.8.4:
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.8.4.tgz#e188bff3cc790c758d25646f6f5daf9854c98eef"
+  integrity sha512-bkHDHNxm7bU4+bJL4z96fTlJYN34UDRTu3ghEajJrDepayON9YEaxPrXr7xhLnIRntoFC6eDYYhMNA/ilbj2RQ==
+
 js-sdsl@^4.1.4:
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/js-sdsl/-/js-sdsl-4.1.4.tgz#78793c90f80e8430b7d8dc94515b6c77d98a26a6"
@@ -4468,7 +4473,7 @@ regexpp@^3.2.0:
   resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-3.2.0.tgz#0425a2768d8f23bad70ca4b90461fa2f1213e1b2"
   integrity sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==
 
-remotion@3.2.21, remotion@^3.2.21:
+remotion@3.2.21:
   version "3.2.21"
   resolved "https://registry.yarnpkg.com/remotion/-/remotion-3.2.21.tgz#4384bc8ef10e1a2f1f7e649f890f4443bd3aacce"
   integrity sha512-9VSfHxX0Rrg66TaDVpNE04prPP6bH2Hc+liGBZvr1/0GQoIbmPHRA1H2FyN0P0rznToYRiBRXAZPcwtykoR9bg==

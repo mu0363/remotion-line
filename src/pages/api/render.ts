@@ -4,7 +4,6 @@ import {
   renderMediaOnLambda,
   RenderProgress,
 } from "@remotion/lambda";
-import { v4 as uuidv4 } from "uuid";
 import { REGION, SITE_ID } from "src/libs/const";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Template1Type } from "src/libs/types";
