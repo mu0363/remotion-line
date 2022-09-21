@@ -1,1 +1,1 @@
-export { Template1DefaultProps } from "./remotion-config";
+export { Template1DefaultProps, SITE_ID, REGION } from "./remotion-config";

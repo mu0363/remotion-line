@@ -2,8 +2,8 @@ import type { FC } from "react";
 import { Provider } from "react-redux";
 import { Composition } from "remotion";
 import { Templater01 } from "./Templater01";
-import { store } from "src/libs/store";
-import { Template1DefaultProps } from "src/libs/const";
+import { store } from "../libs/store";
+import { Template1DefaultProps } from "../libs/const";
 
 export const MyVideo: FC = () => {
   return (

@@ -1,1 +1,1 @@
-export type { Template1Type } from "./types";
+export type { Template1Type, RenderInfo } from "./types";

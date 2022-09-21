@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Template1DefaultProps } from "src/libs/const";
-import { Template1Type } from "src/libs/types";
+import { Template1DefaultProps } from "../../const";
+import { Template1Type } from "../../types";
 
 export const template1Slice = createSlice({
   name: "template1",

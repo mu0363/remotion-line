@@ -1,6 +1,7 @@
 import type { Liff } from "@line/liff";
 import { Player } from "@remotion/player";
 import type { NextPage } from "next";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Form } from "src/components/Form";
 import { selectAllTemplate1Data } from "src/libs/store/features/template1Slice";
@@ -10,7 +11,22 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
   liff,
   liffError,
 }) => {
+  const [idToken, setIdToken] = useState(null);
   const template1Data = useSelector(selectAllTemplate1Data);
+
+  useEffect(() => {
+    if (liff) {
+      const foo = liff?.isLoggedIn();
+      console.log({ foo });
+
+      const idToken = liff.getIDToken();
+      const token = liff.getAccessToken();
+      console.log({ token });
+    }
+
+    console.log({ idToken });
+  }, [liff]);
+
   return (
     <div>
       <Player
@@ -26,6 +42,7 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
         autoPlay
       />
       <Form />
+      <p>{`idToken: ${idToken}`}</p>
     </div>
   );
 };

@@ -6,13 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "render": "remotion render src/remotion/index.tsx MyComp out/video.mp4",
+    "video": "remotion preview src/remotion/index.tsx",
+    "site": "npx remotion lambda sites create src/remotion/index.tsx --site-name=remotion-liff",
+    "deploy": "npx remotion lambda functions deploy"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.11",
     "@line/liff": "2.21.1",
     "@reduxjs/toolkit": "^1.8.5",
-    "@remotion/cli": "^3.2.21",
-    "@remotion/player": "^3.2.21",
+    "@remotion/cli": "3.2.21",
+    "@remotion/lambda": "3.2.21",
+    "@remotion/player": "3.2.21",
     "@supabase/supabase-js": "^2.0.0-rc.10",
     "@tabler/icons": "^1.96.0",
     "date-fns": "^2.29.3",
@@ -20,12 +26,14 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.2",
-    "remotion": "^3.2.21"
+    "remotion": "3.2.21",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "18.7.18",
     "@types/react": "18.0.20",
     "@types/react-dom": "18.0.6",
+    "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.11",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.1",

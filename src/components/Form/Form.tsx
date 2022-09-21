@@ -1,9 +1,10 @@
-import { IconCamera } from "@tabler/icons";
+import { IconCamera, IconCloudStorm } from "@tabler/icons";
 import { format } from "date-fns";
 import Image from "next/image";
 import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { storageUrl, USER_ID } from "src/libs/const/remotion-config";
+import { PhotoIcon } from "@heroicons/react/24/solid";
 import {
   selectAllTemplate1Data,
   updateImage,
@@ -16,6 +17,14 @@ export const Form = () => {
   const dispatch = useDispatch();
   const template1Data = useSelector(selectAllTemplate1Data);
   const { image_url } = template1Data;
+
+  // 書き出し開始
+  const renderStart = async () => {
+    await fetch("/api/render", {
+      method: "POST",
+      body: JSON.stringify(template1Data),
+    });
+  };
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -52,31 +61,21 @@ export const Form = () => {
   };
 
   return (
-    <div>
-      {image_url !== undefined && (
-        <div className="flex items-center justify-center mt-10">
-          <label className="inline-block cursor-pointer">
-            <div className="relative h-16 w-32">
-              <IconCamera className="absolute top-0 left-0 z-10 h-16 w-32 rounded-xl p-3 text-gray-500 transition duration-200 ease-in-out bg-gray-200 opacity-40" />
-              <Image
-                width={160}
-                height={80}
-                src={image_url}
-                objectFit="cover"
-                alt="current-image"
-                className="rounded-xl"
-              />
-            </div>
-            <input
-              type="file"
-              name="avatar-upload"
-              accept="image/*"
-              className="hidden"
-              onChange={handleImage}
-            />
-          </label>
-        </div>
-      )}
+    <div className="flex items-center justify-center mt-10 space-x-6">
+      <label className="inline-block cursor-pointer">
+        <PhotoIcon className="h-8 text-gray-600" />
+        <input
+          type="file"
+          name="avatar-upload"
+          accept="image/*"
+          className="hidden"
+          onChange={handleImage}
+        />
+      </label>
+      <div className="flex items-center bg-orange-400 text-white py-2 px-6 rounded-full font-bold">
+        <IconCloudStorm className="mr-3" />
+        <button onClick={renderStart}>書き出し</button>
+      </div>
     </div>
   );
 };

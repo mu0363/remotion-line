@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { AbsoluteFill, Sequence } from "remotion";
-import { Template1Type } from "src/libs/types";
+import { Template1Type } from "../../libs/types";
 import { T01Image } from "./T01Image";
 import { T01Text } from "./T01Text";
 
