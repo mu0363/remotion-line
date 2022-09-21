@@ -11,11 +11,14 @@ import {
 } from "src/libs/store/features/template1Slice";
 import { supabaseClient } from "src/libs/supabase/supabaseClient";
 import { Template1Type } from "src/libs/types";
+import { template1DataAtom } from "src/libs/jotai/atom";
+import { useAtom } from "jotai";
 
 /** @package */
 export const Form = () => {
   const dispatch = useDispatch();
-  const template1Data = useSelector(selectAllTemplate1Data);
+  // const template1Data = useSelector(selectAllTemplate1Data);
+  const [template1Data, setTemplate1Data] = useAtom(template1DataAtom);
   const { image_url } = template1Data;
 
   // 書き出し開始
@@ -31,7 +34,7 @@ export const Form = () => {
     const file = e.target.files[0];
     const filename = `T1_${format(new Date(), "yyyyMMddhhmmss")}`;
     const objectUrl = window.URL.createObjectURL(file);
-    dispatch(updateImage({ image_url: objectUrl }));
+    setTemplate1Data({ ...template1Data, image_url: objectUrl });
     (async () => {
       const { data, error } = await supabaseClient.storage
         .from("images")
@@ -52,11 +55,10 @@ export const Form = () => {
             template_number: 1,
           },
         ]);
-      dispatch(
-        updateImage({
-          image_url: `${storageUrl}/images/${data.path}`,
-        })
-      );
+      setTemplate1Data({
+        ...template1Data,
+        image_url: `${storageUrl}/images/${data.path}`,
+      });
     })().catch((err) => console.log(err));
   };
 

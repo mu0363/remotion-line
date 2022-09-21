@@ -1,31 +1,29 @@
 import type { Liff } from "@line/liff";
 import { Player } from "@remotion/player";
+import { useAtom, useAtomValue } from "jotai";
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
 import { Form } from "src/components/Form";
-import { selectAllTemplate1Data } from "src/libs/store/features/template1Slice";
+import { idTokenAtom, template1DataAtom } from "src/libs/jotai/atom";
 import { Templater01 } from "src/remotion/Templater01";
+import { useAtomDevtools } from "jotai/devtools";
 
 const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
   liff,
   liffError,
 }) => {
-  const [idToken, setIdToken] = useState(null);
-  const template1Data = useSelector(selectAllTemplate1Data);
+  // const template1Data = useSelector(selectAllTemplate1Data);
+  useAtomDevtools(idTokenAtom);
+  const [idToken, setIdToken] = useAtom(idTokenAtom);
+  const template1Data = useAtomValue(template1DataAtom);
 
   useEffect(() => {
     if (liff) {
-      const foo = liff?.isLoggedIn();
-      console.log({ foo });
-
-      const idToken = liff.getIDToken();
-      const token = liff.getAccessToken();
-      console.log({ token });
+      liff.ready.then(() => {
+        setIdToken(liff.getIDToken());
+      });
     }
-
-    console.log({ idToken });
-  }, [liff]);
+  }, [liff, setIdToken]);
 
   return (
     <div>
@@ -42,7 +40,7 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
         autoPlay
       />
       <Form />
-      <p>{`idToken: ${idToken}`}</p>
+      <button onClick={() => console.log(idToken)}>Show IDToken</button>
     </div>
   );
 };

@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { NextComponentType, NextPageContext } from "next";
 import { Provider } from "react-redux";
 import { store } from "src/libs/store";
+import { Provider as JotaiProvider, useAtom } from "jotai";
+import { idTokenAtom } from "src/libs/jotai/atom";
 
 type AppProps = {
   pageProps: any;
@@ -13,6 +15,7 @@ type AppProps = {
 function MyApp({ Component, pageProps }: AppProps) {
   const [liffObject, setLiffObject] = useState<Liff | null>(null);
   const [liffError, setLiffError] = useState<string | null>(null);
+  const [idToken, setIdToken] = useAtom(idTokenAtom);
 
   // Execute liff.init() when the app is initialized
   useEffect(() => {
@@ -32,16 +35,18 @@ function MyApp({ Component, pageProps }: AppProps) {
             setLiffError(error.toString());
           });
       });
-  }, []);
+  }, [setIdToken, idToken]);
 
   // Provide `liff` object and `liffError` object
   // to page component as property
   pageProps.liff = liffObject;
   pageProps.liffError = liffError;
   return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    <JotaiProvider>
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </JotaiProvider>
   );
 }
 

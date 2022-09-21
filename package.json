@@ -22,6 +22,7 @@
     "@supabase/supabase-js": "^2.0.0-rc.10",
     "@tabler/icons": "^1.96.0",
     "date-fns": "^2.29.3",
+    "jotai": "^1.8.4",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
