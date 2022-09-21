@@ -9,17 +9,15 @@ import { Provider as JotaiProvider } from "jotai";
 export const MyVideo: FC = () => {
   return (
     <JotaiProvider>
-      <Provider store={store}>
-        <Composition
-          id="template01"
-          component={Templater01}
-          durationInFrames={120}
-          width={1080}
-          height={1080}
-          fps={30}
-          defaultProps={Template1DefaultProps}
-        />
-      </Provider>
+      <Composition
+        id="template01"
+        component={Templater01}
+        durationInFrames={120}
+        width={1080}
+        height={1080}
+        fps={30}
+        defaultProps={Template1DefaultProps}
+      />
     </JotaiProvider>
   );
 };

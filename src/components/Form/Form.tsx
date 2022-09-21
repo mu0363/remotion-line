@@ -1,14 +1,9 @@
 import { IconCamera, IconCloudStorm } from "@tabler/icons";
 import { format } from "date-fns";
-import Image from "next/image";
 import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { storageUrl, USER_ID } from "src/libs/const/remotion-config";
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import {
-  selectAllTemplate1Data,
-  updateImage,
-} from "src/libs/store/features/template1Slice";
 import { supabaseClient } from "src/libs/supabase/supabaseClient";
 import { Template1Type } from "src/libs/types";
 import { template1DataAtom } from "src/libs/jotai/atom";
@@ -16,10 +11,7 @@ import { useAtom } from "jotai";
 
 /** @package */
 export const Form = () => {
-  const dispatch = useDispatch();
-  // const template1Data = useSelector(selectAllTemplate1Data);
   const [template1Data, setTemplate1Data] = useAtom(template1DataAtom);
-  const { image_url } = template1Data;
 
   // 書き出し開始
   const renderStart = async () => {

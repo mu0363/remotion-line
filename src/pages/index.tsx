@@ -7,6 +7,7 @@ import { Form } from "src/components/Form";
 import { idTokenAtom, template1DataAtom } from "src/libs/jotai/atom";
 import { Templater01 } from "src/remotion/Templater01";
 import { useAtomDevtools } from "jotai/devtools";
+import { LifebuoyIcon } from "@heroicons/react/24/solid";
 
 const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
   liff,
@@ -20,11 +21,17 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
   useEffect(() => {
     if (liff) {
       liff.ready.then(() => {
-        setIdToken(liff.getIDToken());
+        const result = liff.isLoggedIn();
+        console.log({ result });
+
+        if (liff.isLoggedIn()) {
+          const context = liff.getContext();
+          const liffToken = liff.getAccessToken();
+          console.log({ context });
+        }
       });
     }
-  }, [liff, setIdToken]);
-
+  }, []);
   return (
     <div>
       <Player
@@ -40,7 +47,7 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
         autoPlay
       />
       <Form />
-      <button onClick={() => console.log(idToken)}>Show IDToken</button>
+      <button onClick={() => console.log("pushed")}>Show IDToken</button>
     </div>
   );
 };
