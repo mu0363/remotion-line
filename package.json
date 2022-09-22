@@ -2,6 +2,9 @@
   "name": "remotion-line",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,6 +17,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.11",
+    "@line/bot-sdk": "^7.5.2",
     "@line/liff": "2.21.1",
     "@reduxjs/toolkit": "^1.8.5",
     "@remotion/cli": "3.2.21",
@@ -21,6 +25,7 @@
     "@remotion/player": "3.2.21",
     "@supabase/supabase-js": "^2.0.0-rc.10",
     "@tabler/icons": "^1.96.0",
+    "axios": "^0.27.2",
     "date-fns": "^2.29.3",
     "jotai": "^1.8.4",
     "next": "12.3.1",
@@ -31,6 +36,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@line/liff-inspector": "^1.0.2",
     "@types/node": "18.7.18",
     "@types/react": "18.0.20",
     "@types/react-dom": "18.0.6",
@@ -39,6 +45,8 @@
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.1",
     "postcss": "^8.4.16",
+    "postcss-loader": "^7.0.1",
+    "postcss-preset-env": "^7.8.2",
     "tailwindcss": "^3.1.8",
     "typescript": "4.8.3"
   }

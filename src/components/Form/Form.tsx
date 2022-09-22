@@ -1,31 +1,27 @@
 import { IconCamera, IconCloudStorm } from "@tabler/icons";
 import { format } from "date-fns";
-import Image from "next/image";
-import { ChangeEvent } from "react";
+import { ChangeEvent, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { storageUrl, USER_ID } from "src/libs/const/remotion-config";
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import {
-  selectAllTemplate1Data,
-  updateImage,
-} from "src/libs/store/features/template1Slice";
 import { supabaseClient } from "src/libs/supabase/supabaseClient";
 import { Template1Type } from "src/libs/types";
-import { template1DataAtom } from "src/libs/jotai/atom";
-import { useAtom } from "jotai";
+import { accessTokenAtom, template1DataAtom } from "src/libs/jotai/atom";
+import { useAtom, useAtomValue } from "jotai";
+import { Liff } from "@line/liff/dist/lib";
+import axios from "axios";
 
 /** @package */
-export const Form = () => {
-  const dispatch = useDispatch();
-  // const template1Data = useSelector(selectAllTemplate1Data);
+export const Form: FC<{ liff: Liff }> = ({ liff }) => {
+  const accessToken = useAtomValue(accessTokenAtom);
   const [template1Data, setTemplate1Data] = useAtom(template1DataAtom);
-  const { image_url } = template1Data;
 
   // 書き出し開始
   const renderStart = async () => {
-    await fetch("/api/render", {
-      method: "POST",
-      body: JSON.stringify(template1Data),
+    liff.closeWindow();
+    await axios.post("/api/render", {
+      accessToken,
+      templateData: template1Data,
     });
   };
 
@@ -74,10 +70,13 @@ export const Form = () => {
           onChange={handleImage}
         />
       </label>
-      <div className="flex items-center bg-orange-400 text-white py-2 px-6 rounded-full font-bold">
+      <button
+        className="flex items-center bg-orange-400 text-white py-2 px-6 rounded-full font-bold"
+        onClick={renderStart}
+      >
         <IconCloudStorm className="mr-3" />
-        <button onClick={renderStart}>書き出し</button>
-      </div>
+        <p>映像ゲット!</p>
+      </button>
     </div>
   );
 };
