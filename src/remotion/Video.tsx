@@ -1,8 +1,7 @@
+import "../styles/globals.css";
 import type { FC } from "react";
-import { Provider } from "react-redux";
 import { Composition } from "remotion";
 import { Templater01 } from "./Templater01";
-import { store } from "../libs/store";
 import { Template1DefaultProps } from "../libs/const";
 import { Provider as JotaiProvider } from "jotai";
 

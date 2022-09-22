@@ -75,7 +75,7 @@ export const Form: FC<{ liff: Liff }> = ({ liff }) => {
         onClick={renderStart}
       >
         <IconCloudStorm className="mr-3" />
-        <p>書き出し</p>
+        <p>映像ゲット!</p>
       </button>
     </div>
   );
