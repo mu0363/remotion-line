@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   getFunctions,
   getRenderProgress,
@@ -7,6 +8,13 @@ import {
 import { REGION, SITE_ID } from "src/libs/const";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Template1Type } from "src/libs/types";
+import * as line from "src/libs/line";
+
+type ProfileRes = {
+  userId: string;
+  displayName: string;
+  pictureUrl: string;
+};
 
 export type RenderProgressType =
   | {
@@ -62,9 +70,28 @@ export default async function handler(
 
   try {
     // FIXME: アサーション削除
-    const data = req.body as string;
-    const templateData = JSON.parse(data) as Template1Type;
+    const { accessToken, templateData } = req.body as {
+      accessToken: string;
+      templateData: Template1Type;
+    };
 
+    // lineからProfileを取得
+    const { data } = await axios.get<ProfileRes>(
+      "https://api.line.me/v2/profile",
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    // 書き出し開始のpush通知を送信
+    line.client.pushMessage(data.userId, {
+      type: "text",
+      text: "書き出しを開始しました 🚀  完了したら動画のリンク先をお送りしますので数分お待ちください🦄",
+    });
+
+    // 書き出し開始
     const [first] = await getFunctions({
       compatibleOnly: true,
       region: REGION,
@@ -100,9 +127,15 @@ export default async function handler(
       console.log(progressStatus);
     }
 
-    console.log(currentProgressStatus.url);
+    // 映像URLのpush通知を送信
+    line.client.pushMessage(data.userId, {
+      type: "text",
+      text: `完了しました 🚀  ${currentProgressStatus.url}`,
+    });
 
-    // res.status(200).json(newInfo);
+    // console.log(currentProgressStatus.url);
+
+    // // res.status(200).json(newInfo);
   } catch (error) {
     console.log(error);
   }

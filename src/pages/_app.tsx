@@ -3,6 +3,7 @@ import type { Liff } from "@line/liff";
 import { useState, useEffect } from "react";
 import { NextComponentType, NextPageContext } from "next";
 import { Provider as JotaiProvider } from "jotai";
+import LIFFInspectorPlugin from "@line/liff-inspector";
 
 type AppProps = {
   pageProps: any;
@@ -25,6 +26,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           .then(() => {
             console.log("LIFF init succeeded.");
             setLiffObject(liff);
+            liff.ready.then(() => {
+              const idToken = liff.getIDToken();
+              console.log({ idToken });
+            });
           })
           .catch((error: Error) => {
             console.log("LIFF init failed.");

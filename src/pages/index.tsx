@@ -4,34 +4,23 @@ import { useAtom, useAtomValue } from "jotai";
 import type { NextPage } from "next";
 import { useEffect } from "react";
 import { Form } from "src/components/Form";
-import { idTokenAtom, template1DataAtom } from "src/libs/jotai/atom";
+import { accessTokenAtom, template1DataAtom } from "src/libs/jotai/atom";
 import { Templater01 } from "src/remotion/Templater01";
-import { useAtomDevtools } from "jotai/devtools";
-import { LifebuoyIcon } from "@heroicons/react/24/solid";
 
 const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
   liff,
   liffError,
 }) => {
-  // const template1Data = useSelector(selectAllTemplate1Data);
-  useAtomDevtools(idTokenAtom);
-  const [idToken, setIdToken] = useAtom(idTokenAtom);
+  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
   const template1Data = useAtomValue(template1DataAtom);
 
   useEffect(() => {
     if (liff) {
       liff.ready.then(() => {
-        const result = liff.isLoggedIn();
-        console.log({ result });
-
-        if (liff.isLoggedIn()) {
-          const context = liff.getContext();
-          const liffToken = liff.getAccessToken();
-          console.log({ context });
-        }
+        setAccessToken(liff.getAccessToken());
       });
     }
-  }, []);
+  }, [liff, setAccessToken]);
   return (
     <div>
       <Player
@@ -46,8 +35,8 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
         loop
         autoPlay
       />
-      <Form />
-      <button onClick={() => console.log("pushed")}>Show IDToken</button>
+      {liff && <Form liff={liff} />}
+      <p className="text-xs text-gray-300">{`template1Data: ${template1Data.image_url}`}</p>
     </div>
   );
 };
