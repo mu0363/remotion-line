@@ -36,8 +36,6 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
         autoPlay
       />
       {liff && <Form liff={liff} />}
-      <p className="text-xs text-gray-300 truncate">{`template1Data: ${template1Data.image_url}`}</p>
-      <p className="text-xs text-gray-300 truncate">{`accessToken: ${accessToken}`}</p>
     </div>
   );
 };
