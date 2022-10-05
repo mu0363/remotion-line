@@ -9,6 +9,7 @@ import { REGION, SITE_ID } from "src/libs/const";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Template1Type } from "src/libs/types";
 import * as line from "src/libs/line";
+import { LINE_REQUEST_ID_HTTP_HEADER_NAME } from "@line/bot-sdk";
 
 type ProfileRes = {
   userId: string;
@@ -86,9 +87,9 @@ export default async function handler(
     );
 
     // 書き出し開始のpush通知を送信
-    line.client.pushMessage(data.userId, {
+    const messageData = await line.client.pushMessage(data.userId, {
       type: "text",
-      text: "書き出しを開始しました 🚀  完了したら動画のリンク先をお送りしますので数分お待ちください🦄",
+      text: "書き出しを開始しました 🚀 \n完了したら動画のリンク先をお送りしますので数分お待ちください🦄",
     });
 
     // 書き出し開始
@@ -113,6 +114,7 @@ export default async function handler(
       type: "progress",
       percent: 0,
     };
+    res.status(200).send(true);
 
     while (currentProgressStatus.type !== "success") {
       const progress = await getRenderProgress({
@@ -130,10 +132,8 @@ export default async function handler(
     // 映像URLのpush通知を送信
     line.client.pushMessage(data.userId, {
       type: "text",
-      text: `完了しました 🚀  ${currentProgressStatus.url}`,
+      text: `完了しました 🎁 \n${currentProgressStatus.url}`,
     });
-
-    // console.log(currentProgressStatus.url);
 
     // // res.status(200).json(newInfo);
   } catch (error) {
