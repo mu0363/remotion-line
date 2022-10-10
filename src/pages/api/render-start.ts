@@ -75,6 +75,8 @@ export default async function handler(
       accessToken: string;
       templateData: Template1Type;
     };
+    console.log({ accessToken });
+    console.log({ templateData });
 
     // lineからProfileを取得
     const { data } = await axios.get<ProfileRes>(
@@ -86,11 +88,15 @@ export default async function handler(
       }
     );
 
+    console.log({ profile: data });
+
     // 書き出し開始のpush通知を送信
     const messageData = await line.client.pushMessage(data.userId, {
       type: "text",
       text: "書き出しを開始しました 🚀 \n完了したら動画のリンク先をお送りしますので数分お待ちください🦄",
     });
+
+    console.log({ messageData });
 
     // 書き出し開始
     const [first] = await getFunctions({
@@ -114,9 +120,14 @@ export default async function handler(
       type: "progress",
       percent: 0,
     };
+    console.log({ renderId });
+
     res.status(200).send(true);
+    console.log("trueを返した");
 
     while (currentProgressStatus.type !== "success") {
+      console.log("whileに入った");
+
       const progress = await getRenderProgress({
         renderId,
         bucketName,
