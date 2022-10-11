@@ -23,11 +23,11 @@ export const Form: FC<{ liff: Liff }> = ({ liff }) => {
 
   // 書き出し開始
   const renderStart = async () => {
-    const response = await axios.post<boolean>("/api/render-start", {
+    setIsRendering(true);
+    await axios.post<boolean>("/api/render-start", {
       accessToken,
       templateData: template1Data,
     });
-    setIsRendering(response.data);
   };
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
