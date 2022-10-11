@@ -47,12 +47,14 @@ const getRenderProgressStatus = (
     return {
       type: "error",
       percent: 0,
+
       errors: progress.errors[0].stack,
     };
   }
 
   return {
     type: "progress",
+
     percent: progress.overallProgress,
   };
 };
@@ -115,17 +117,17 @@ export default async function handler(
     };
 
     while (currentProgressStatus.type !== "success") {
-      console.log("whileに入った");
       const progress = await getRenderProgress({
         renderId,
         bucketName,
         functionName: first.functionName,
         region: REGION,
       });
+      console.log({ error: progress.errors });
 
       const progressStatus = getRenderProgressStatus(progress);
       currentProgressStatus = progressStatus;
-      await timeout(1000);
+      await timeout(1000 * 10);
       console.log(progressStatus);
     }
 
