@@ -129,7 +129,7 @@ export default async function handler(
 
       // const progressStatus = getRenderProgressStatus(progress);
       // currentProgressStatus = progressStatus;
-      await timeout(1000);
+      await timeout(1000 * 10);
       count++;
       // console.log(progressStatus);
     }
