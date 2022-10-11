@@ -135,8 +135,8 @@ export default async function handler(
       text: `完了しました 🎁 \n${currentProgressStatus.url}`,
     });
 
+    // res.status(200).send(true);
 
-    res.status(200).send(true);
     // // res.status(200).json(newInfo);
   } catch (error) {
     console.log(error);
