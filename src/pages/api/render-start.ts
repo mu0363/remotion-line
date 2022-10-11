@@ -134,6 +134,8 @@ export default async function handler(
         functionName: first.functionName,
         region: REGION,
       });
+      console.log({ progress });
+
       const progressStatus = getRenderProgressStatus(progress);
       currentProgressStatus = progressStatus;
       await timeout(1000);
