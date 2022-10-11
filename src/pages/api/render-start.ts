@@ -116,30 +116,24 @@ export default async function handler(
 
     res.status(200).send(true);
 
-    let count = 0;
+    const progress = await getRenderProgress({
+      renderId,
+      bucketName,
+      functionName: first.functionName,
+      region: REGION,
+    });
 
-    while (count < 10) {
-      console.log("whileに入った");
-      // const progress = await getRenderProgress({
-      //   renderId,
-      //   bucketName,
-      //   functionName: first.functionName,
-      //   region: REGION,
-      // });
+    console.log({ progress });
 
-      // const progressStatus = getRenderProgressStatus(progress);
-      // currentProgressStatus = progressStatus;
-      await timeout(1000 * 10);
-      count++;
-      // console.log(progressStatus);
-    }
+    const progressStatus = getRenderProgressStatus(progress);
+    currentProgressStatus = progressStatus;
 
     // 映像URLのpush通知を送信
-    line.client.pushMessage(data.userId, {
-      type: "text",
-      // text: `完了しました 🎁 \n${currentProgressStatus.url}`,
-      text: `完了しました 🎁`,
-    });
+    // line.client.pushMessage(data.userId, {
+    //   type: "text",
+    //   // text: `完了しました 🎁 \n${currentProgressStatus.url}`,
+    //   text: `完了しました 🎁`,
+    // });
 
     // // res.status(200).json(newInfo);
   } catch (error) {
