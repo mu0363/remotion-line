@@ -136,6 +136,7 @@ export default async function handler(
     });
 
     // res.status(200).send(true);
+
     // // res.status(200).json(newInfo);
   } catch (error) {
     console.log(error);
