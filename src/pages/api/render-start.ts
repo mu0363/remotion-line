@@ -115,6 +115,7 @@ export default async function handler(
     };
 
     res.status(200).send(true);
+    console.log({ renderId });
 
     const progress = await getRenderProgress({
       renderId,
